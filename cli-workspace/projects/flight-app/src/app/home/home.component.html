@@ -5,25 +5,11 @@
   </div>
   <div class="content">
     <div *ngIf="!userName; else loggedIn">
-      <div *ngIf="needsLogin" class="alert alert-warning">
+      <div *ngIf="needsLogin$ | async" class="alert alert-warning">
         You have been redirected to this page because you don't have the necessary
         rights for the reqeusted action. Login with a respective user account!
       </div>
-
-      <form [formGroup]="loginGroup" (submit)="login()">
-        <div>
-          <label for="userName">Username: </label>
-          <input id="userName" type="text" formControlName="userName" required>
-        </div>
-        <div>
-          <label for="password">Password: </label>
-          <input id="password" type="text" formControlName="password" required>
-        </div>
-        <div *ngIf="credentialsInvalid">
-          <p class="invalid-text">Credentials wrong</p>
-        </div>
-        <button type="submit" class="btn btn-default">Login</button>
-      </form>
+      <button (click)="login()" class="btn btn-default">Login</button>
     </div>
 
     <ng-template #loggedIn>

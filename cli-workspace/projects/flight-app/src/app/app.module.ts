@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DefaultLogFormatterService, LoggerModule } from 'logger-lib';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FlightApiModule.forRoot(),
     SharedModule.forRoot(),
     RouterModule.forRoot([...APP_ROUTES], { ...APP_EXTRA_OPTIONS }),
-    LoggerModule.forRoot({ enableDebug: true, logFormatterType: DefaultLogFormatterService})
+    LoggerModule.forRoot({ enableDebug: true, logFormatterType: DefaultLogFormatterService}),
+    OAuthModule.forRoot()
   ],
   declarations: [
     AppComponent,

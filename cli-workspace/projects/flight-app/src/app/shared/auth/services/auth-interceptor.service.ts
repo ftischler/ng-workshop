@@ -9,17 +9,18 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { OAuthStorage } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private oAuthStorage: OAuthStorage) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.startsWith('http://www.angular.at')) {
-      const headers = req.headers.set('Authorization', 'lel');
+      const headers = req.headers.set('Authorization', `Bearer ${this.oAuthStorage.getItem('access_token')}`);
       req = req.clone({ headers });
     }
 

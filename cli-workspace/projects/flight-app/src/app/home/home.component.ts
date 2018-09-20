@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {pluck} from 'rxjs/operators';
+import { pluck, startWith } from 'rxjs/operators';
 import { AuthService } from '../shared/auth/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,39 +12,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
-  public loginGroup = new FormGroup({
-    userName: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  });
+  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute) { }
 
-  public credentialsInvalid = false;
-
-  constructor(private route: ActivatedRoute, private authService: AuthService) {
-  }
-
-  needsLogin: boolean;
-
-  ngOnInit() {
-    this.route.params
-      .pipe(pluck('needsLogin'))
-      .subscribe(
-        (v: boolean) => this.needsLogin = v
-      )
-  }
+  needsLogin$: Observable<boolean>;
 
   get userName(): string {
     return this.authService.userName;
   }
 
+  ngOnInit() {
+    this.needsLogin$ = this.activatedRoute.params.pipe(
+      pluck('needsLogin')
+    )
+  }
+
   login(): void {
-    if (this.loginGroup.valid) {
-      this.credentialsInvalid = !this.authService.login(this.loginGroup.value);
-    }
+    this.authService.login();
   }
 
   logout(): void {
     this.authService.logout();
   }
-
-
 }

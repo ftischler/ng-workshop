@@ -31,7 +31,7 @@ export class FlightService {
     // let url = '/assets/data/data.json';
 
     // For online access
-    let url = [this.baseUrl, 'flight'].join('/');
+    let url = [this.baseUrl, 'secureflight'].join('/');
 
     if (urgent) {
       url = [this.baseUrl,'error?code=403'].join('/');
@@ -59,7 +59,7 @@ export class FlightService {
   }
 
   save(flight: Flight): Observable<Flight> {
-    const url = [this.baseUrl, 'flight'].join('/');
+    const url = [this.baseUrl, 'secureflight'].join('/');
     return this.http.post<Flight>(url, flight);
   }
 
