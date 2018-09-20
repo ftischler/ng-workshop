@@ -10,8 +10,10 @@ import { authConfig } from './config/auth.config';
 })
 export class AppComponent implements OnInit {
   constructor(private loggerService: LoggerService,
-              private oauthService: OAuthService) { }
-              ngOnInit() {
+              private oauthService: OAuthService) {
+  }
+
+  ngOnInit() {
     this.loggerService.debug('Test');
     this.loggerService.log('Test');
 
