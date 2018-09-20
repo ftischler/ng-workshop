@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DefaultLogFormatterService, LoggerModule } from 'logger-lib';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { DefaultLogFormatterService, LoggerModule } from 'logger-lib';
     BrowserModule,
     HttpClientModule,
     FlightBookingModule,
-
+    ReactiveFormsModule,
     FlightApiModule.forRoot(),
     SharedModule.forRoot(),
     RouterModule.forRoot([...APP_ROUTES], { ...APP_EXTRA_OPTIONS }),

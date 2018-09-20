@@ -10,8 +10,26 @@
       rights for the reqeusted action. Login with a respective user account!
     </div>
 
-    <button (click)="login()" class="btn btn-default">Login</button>
-    <button (click)="logout()" class="btn btn-default">Logout</button>
+    <div *ngIf="!userName; else loggedIn">
+      <form [formGroup]="loginGroup" (submit)="login()">
+        <div>
+          <label for="userName">Username: </label>
+          <input id="userName" type="text" formControlName="userName" required>
+        </div>
+        <div>
+          <label for="password">Password: </label>
+          <input id="password" type="text" formControlName="password" required>
+        </div>
+        <div *ngIf="credentialsInvalid">
+          <p class="invalid-text">Credentials wrong</p>
+        </div>
+        <button type="submit" class="btn btn-default">Login</button>
+      </form>
+    </div>
+
+    <ng-template #loggedIn>
+      <button (click)="logout()" class="btn btn-default">Logout</button>
+    </ng-template>
 
     <!--
     <tabbed-pane [activeId]="0">

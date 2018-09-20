@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {pluck} from 'rxjs/operators';
 import { AuthService } from '../shared/auth/services/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,12 @@ import { AuthService } from '../shared/auth/services/auth.service';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+  public loginGroup = new FormGroup({
+    userName: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
+
+  public credentialsInvalid = false;
 
   constructor(private route: ActivatedRoute, private authService: AuthService) {
   }
@@ -29,7 +36,9 @@ export class HomeComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.login();
+    if (this.loginGroup.valid) {
+      this.credentialsInvalid = !this.authService.login(this.loginGroup.value);
+    }
   }
 
   logout(): void {
