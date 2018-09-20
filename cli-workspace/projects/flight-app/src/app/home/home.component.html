@@ -4,13 +4,12 @@
     <h1 *ngIf="!userName">Welcome!</h1>
   </div>
   <div class="content">
-
-    <div *ngIf="needsLogin" class="alert alert-warning">
-      You have been redirected to this page because you don't have the necessary
-      rights for the reqeusted action. Login with a respective user account!
-    </div>
-
     <div *ngIf="!userName; else loggedIn">
+      <div *ngIf="needsLogin" class="alert alert-warning">
+        You have been redirected to this page because you don't have the necessary
+        rights for the reqeusted action. Login with a respective user account!
+      </div>
+
       <form [formGroup]="loginGroup" (submit)="login()">
         <div>
           <label for="userName">Username: </label>
