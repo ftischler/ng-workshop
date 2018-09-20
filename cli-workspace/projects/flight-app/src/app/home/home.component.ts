@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {pluck} from 'rxjs/operators';
+import { AuthService } from '../shared/auth/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,11 +11,10 @@ import {pluck} from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private authService: AuthService) {
   }
 
   needsLogin: boolean;
-  _userName: string = '';
 
   ngOnInit() {
     this.route.params
@@ -25,15 +25,15 @@ export class HomeComponent implements OnInit {
   }
 
   get userName(): string {
-    return this._userName;
+    return this.authService.userName;
   }
 
   login(): void {
-    this._userName = 'Login will be implemented in another exercise!'
+    this.authService.login();
   }
 
   logout(): void {
-    this._userName = '';
+    this.authService.logout();
   }
 
 
