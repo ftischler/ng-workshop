@@ -6,12 +6,14 @@ import { PassengerSearchComponent } from './passenger-search/passenger-search.co
 import { AirportComponent } from './airport/airport.component';
 import { AuthGuard } from '../shared/auth/guards/auth.guard';
 import { CanDeactivateGuard } from '../shared/can-deactivation/can-deactivate.guard';
+import { ChildGuard } from '../shared/auth/guards/child.guard';
 
 export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
     path: 'flight-booking',
     component: FlightBookingComponent,
     canActivate: [AuthGuard],
+    canActivateChild: [ChildGuard],
     children: [
       {
         path: 'flight-search',
