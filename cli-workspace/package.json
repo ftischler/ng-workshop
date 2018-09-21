@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "report": "ng build --aot=true --stats-json && webpack-bundle-analyzer dist/flight-app/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.1.0",
+    "webpack-bundle-analyzer": "^3.0.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

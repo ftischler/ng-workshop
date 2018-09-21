@@ -22,4 +22,3 @@ export class AppComponent implements OnInit {
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 }
-
