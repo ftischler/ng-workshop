@@ -17,9 +17,6 @@
       "dom"
     ],
     "paths": {
-      "logger-lib": [
-        "dist/logger-lib"
-      ],
       "logger-lib/*": [
         "dist/logger-lib/*"
       ]
